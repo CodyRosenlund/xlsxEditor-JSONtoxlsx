@@ -51,8 +51,11 @@ public class xlsxEditorController {
             }
             else if (exit_value == 3) {
                 errorMessage += "Unable to to find worksheet.";
-            }
-            else {
+            } else if (exit_value == 4) {
+                errorMessage += "Please close any related xlsx files.";
+            } else if (exit_value == 5) {
+                errorMessage += "Unable to to find worksheet.";
+            } else {
                 errorMessage += "Unexpected error.";
             }
             

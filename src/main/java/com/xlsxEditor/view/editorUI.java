@@ -11,22 +11,7 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class editorUI extends JFrame {
@@ -50,6 +35,19 @@ public class editorUI extends JFrame {
         } catch (Throwable var3) {
             var3.printStackTrace();
         }
+
+//        JTabbedPane jtp = new JTabbedPane();
+//        getContentPane().add(jtp);
+//        JPanel jp1 = new JPanel();
+//        JPanel jp2 = new JPanel();
+//        JLabel label1 = new JLabel();
+//        label1.setText("You are in area of Tab1");
+//        JLabel label2 = new JLabel();
+//        label2.setText("You are in area of Tab2");
+//        jp1.add(label1);
+//        jp2.add(label2);
+//        jtp.addTab("Tab1", jp1);
+//        jtp.addTab("Tab2", jp2);
 
         this.setTitle("xlsx Editor");
         this.setDefaultCloseOperation(3);

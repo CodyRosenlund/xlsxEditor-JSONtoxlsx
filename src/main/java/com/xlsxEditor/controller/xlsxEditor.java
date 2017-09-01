@@ -1,9 +1,5 @@
 package com.xlsxEditor.controller;
 
-/**
- * Hello world!
- */
-
 import java.io.*;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -68,9 +64,22 @@ public class xlsxEditor implements Runnable {
 
                     XSSFCell cell0 = row.getCell(0);
 
+                    // parse xpath from the generate group name (7.6 and 7.7)
                     if (cell0.toString().matches("<.*-.*?/(.+?)>.*")) {
                         groupXpath = cell0.toString().replaceAll("<.*-.*?/(.+?)>.*", "$1");
-                    } 
+                    }
+                    // RSX below 7.6 has a different generated xpath to parse from (7.2-7.5)
+                    else if (cell0.toString().matches(".*-\\s(.+?)")) {
+                        groupXpath = cell0.toString().replaceAll(".*-\\s(.+?)", "$1");
+                        String[] xpathArray = groupXpath.split("\\.");
+                        String new_groupXpath = "";
+                        for (String xpath : xpathArray) {
+                            if (!xpath.contains("Rep")) {
+                                new_groupXpath = new_groupXpath + xpath + "/";
+                            }
+                        }
+                        groupXpath = new_groupXpath.replaceAll("/$", "");
+                    }
                     // check that we have found the xpath from the group and we only want to change the fields
                     else if (!groupXpath.equals("") && cell0.toString().matches("\\d+") && !row.getCell(1).toString().contains(" ")) {
                         XSSFCell xpathCell = row.getCell(xpathColumn);
@@ -85,9 +94,9 @@ public class xlsxEditor implements Runnable {
                     workbook.write(fos);
                     fos.close();
                 } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    exit_value = 4;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    exit_value = 5;
                 }
             }
         } else {
