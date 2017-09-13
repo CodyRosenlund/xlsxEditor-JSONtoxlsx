@@ -63,27 +63,30 @@ public class xlsxEditor implements Runnable {
                 if (row != null && row.getLastCellNum() > 0) {
 
                     XSSFCell cell0 = row.getCell(0);
+                    if (cell0 != null) {
 
-                    // parse xpath from the generate group name (7.6 and 7.7)
-                    if (cell0.toString().matches("<.*-.*?/(.+?)>.*")) {
-                        groupXpath = cell0.toString().replaceAll("<.*-.*?/(.+?)>.*", "$1");
-                    }
-                    // RSX below 7.6 has a different generated xpath to parse from (7.2-7.5)
-                    else if (cell0.toString().matches(".*-\\s(.+?)")) {
-                        groupXpath = cell0.toString().replaceAll(".*-\\s(.+?)", "$1");
-                        String[] xpathArray = groupXpath.split("\\.");
-                        String new_groupXpath = "";
-                        for (String xpath : xpathArray) {
-                            if (!xpath.contains("Rep")) {
-                                new_groupXpath = new_groupXpath + xpath + "/";
-                            }
+                        // parse xpath from the generate group name (7.6 and 7.7)
+                        System.out.println("HERE:" + cell0.toString());
+                        if (cell0.toString().matches("<.*-.*?/(.+?)>.*")) {
+                            groupXpath = cell0.toString().replaceAll("<.*-.*?/(.+?)>.*", "$1");
                         }
-                        groupXpath = new_groupXpath.replaceAll("/$", "");
-                    }
-                    // check that we have found the xpath from the group and we only want to change the fields
-                    else if (!groupXpath.equals("") && cell0.toString().matches("\\d+") && !row.getCell(1).toString().contains(" ")) {
-                        XSSFCell xpathCell = row.getCell(xpathColumn);
-                        xpathCell.setCellValue(groupXpath + "/" + row.getCell(1).toString());
+                        // RSX below 7.6 has a different generated xpath to parse from (7.2-7.5)
+                        else if (cell0.toString().matches(".*-\\s(.+?)")) {
+                            groupXpath = cell0.toString().replaceAll(".*-\\s(.+?)", "$1");
+                            String[] xpathArray = groupXpath.split("\\.");
+                            String new_groupXpath = "";
+                            for (String xpath : xpathArray) {
+                                if (!xpath.contains("Rep")) {
+                                    new_groupXpath = new_groupXpath + xpath + "/";
+                                }
+                            }
+                            groupXpath = new_groupXpath.replaceAll("/$", "");
+                        }
+                        // check that we have found the xpath from the group and we only want to change the fields
+                        else if (!groupXpath.equals("") && cell0.toString().matches("\\d+") && !row.getCell(1).toString().contains(" ")) {
+                            XSSFCell xpathCell = row.getCell(xpathColumn);
+                            xpathCell.setCellValue(groupXpath + "/" + row.getCell(1).toString());
+                        }
                     }
                 }
             }
