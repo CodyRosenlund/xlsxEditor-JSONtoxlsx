@@ -10,15 +10,12 @@ import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class editorUI extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JLabel lblrsxVersion;
-    public JComboBox rsxVersionComboBox;
     private JLabel lblInputFile;
     public JTextField inputFileTextField;
     public JButton fileSelectButton;
@@ -26,8 +23,6 @@ public class editorUI extends JFrame {
     public JProgressBar progressBar;
     private JLabel lblStatus;
     public JLabel statusLabel;
-    private JLabel lblcolumn;
-    public JComboBox docTypeComboBox;
 
     public editorUI() {
         try {
@@ -37,7 +32,7 @@ public class editorUI extends JFrame {
             var3.printStackTrace();
         }
 
-        this.setTitle("xlsx to JSON Editor");
+        this.setTitle("JSON to xlsx Editor");
         this.setDefaultCloseOperation(3);
         this.setBounds(100, 100, 490, 200);
         this.contentPane = new JPanel();
@@ -52,23 +47,6 @@ public class editorUI extends JFrame {
         this.inputFileTextField = new JTextField();
         this.inputFileTextField.setBounds(120, 17, 200, 20);
         this.contentPane.add(this.inputFileTextField);
-        this.inputFileTextField.setColumns(10);
-
-        this.lblrsxVersion = new JLabel("RSX version:");
-        this.lblrsxVersion.setBounds(10, 50, 110, 14);
-        this.contentPane.add(this.lblrsxVersion);
-
-        this.rsxVersionComboBox = new JComboBox(new String[]{"7.7", "7.6", "7.5", "7.4"});
-        this.rsxVersionComboBox.setBounds(120, 47, 80, 20);
-        this.contentPane.add(this.rsxVersionComboBox);
-
-        this.lblcolumn = new JLabel("Document Type:");
-        this.lblcolumn.setBounds(10, 80, 110, 14);
-        this.contentPane.add(this.lblcolumn);
-
-        this.docTypeComboBox = new JComboBox(new String[]{"Invoice", "Order", "OrderAck", "Shipment"});
-        this.docTypeComboBox.setBounds(120, 77, 150, 20);
-        this.contentPane.add(this.docTypeComboBox);
 
         this.fileSelectButton = new JButton("Select File");
         this.fileSelectButton.addActionListener(new editorUI.BtnSelectActionListener());
@@ -82,7 +60,7 @@ public class editorUI extends JFrame {
             }
         });
         this.runButton.setFont(new Font("Tahoma", 0, 11));
-        this.runButton.setBounds(362, 74, 89, 23);
+        this.runButton.setBounds(362, 116, 89, 23);
         this.runButton.setMnemonic(82);
         this.contentPane.add(this.runButton);
 

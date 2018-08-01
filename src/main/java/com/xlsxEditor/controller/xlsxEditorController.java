@@ -29,7 +29,7 @@ class xlsxEditorController {
     }
 
     private void run() {
-        this.xlsxEditor = new xlsxEditor(this.mainWindow.inputFileTextField.getText(), (String) this.mainWindow.rsxVersionComboBox.getSelectedItem(), (String) this.mainWindow.docTypeComboBox.getSelectedItem(), this);
+        this.xlsxEditor = new xlsxEditor(this.mainWindow.inputFileTextField.getText(), this);
         this.altThread = new Thread(this.xlsxEditor);
         this.altThread.start();
     }
